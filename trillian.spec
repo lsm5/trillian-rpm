@@ -25,10 +25,10 @@
 
 Name: trillian
 Version: 1.3.13
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: A transparent, highly scalable and cryptographically verifiable data store
 License: ASL 2.0
-URL: https://%{name}.io/
+URL: %{git0}
 Source0: %{git0}/archive/v%{version}.tar.gz
 BuildRequires: gcc
 BuildRequires: golang
@@ -39,7 +39,19 @@ BuildRequires: git-core
 Requires: mariadb-server
 
 %description
-%{summry}
+%{summary}
+
+%package log-server
+Summary: Trillian Log Server
+
+%description log-server
+Trillian Log Server
+
+%package log-signer
+Summary: Trillian Log Signer
+
+%description log-signer 
+Trillian Log Signer
 
 %prep
 %autosetup -Sgit_am -n %{name}-%{version}
@@ -66,13 +78,20 @@ install -p bin/* %{buildroot}%{_bindir}
 #define license tag if not already defined
 %{!?_licensedir:%global license %doc}
 
-%files
+%files log-server
 %license LICENSE
 %doc AUTHORS CHANGELOG.md CODEOWNERS CONTRIBUTING.md CONTRIBUTORS PULL_REQUEST_TEMPLATE.md README.md
 %{_bindir}/%{name}_log_server
+
+%files log-signer
+%license LICENSE
+%doc AUTHORS CHANGELOG.md CODEOWNERS CONTRIBUTING.md CONTRIBUTORS PULL_REQUEST_TEMPLATE.md README.md
 %{_bindir}/%{name}_log_signer
 
 %changelog
+* Tue May 18 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 1.3.13-5
+- subpackages for server and signer
+
 * Tue May 18 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 1.3.13-4
 - correct build steps for binaries
 
