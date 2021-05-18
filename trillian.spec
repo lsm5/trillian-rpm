@@ -25,7 +25,7 @@
 
 Name: trillian
 Version: 1.3.13
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A transparent, highly scalable and cryptographically verifiable data store
 License: ASL 2.0
 URL: https://%{name}.io/
@@ -55,7 +55,7 @@ export CGO_CFLAGS="$CGO_CFLAGS -fcf-protection"
 
 mkdir bin
 go build -o bin/%{name}_log_server ./cmd/%{name}_log_server
-go build -o bin/%{name}_log_server ./cmd/%{name}_log_signer
+go build -o bin/%{name}_log_signer ./cmd/%{name}_log_signer
 
 %install
 install -dp %{buildroot}%{_bindir}
@@ -73,6 +73,9 @@ install -p bin/* %{buildroot}%{_bindir}
 %{_bindir}/%{name}_log_signer
 
 %changelog
+* Tue May 18 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 1.3.13-4
+- correct build steps for binaries
+
 * Tue May 18 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 1.3.13-3
 - requires: mariadb-server
 
