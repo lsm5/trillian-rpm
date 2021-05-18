@@ -25,7 +25,7 @@
 
 Name: trillian
 Version: 1.3.13
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A transparent, highly scalable and cryptographically verifiable data store
 License: ASL 2.0
 URL: https://%{name}.io/
@@ -36,6 +36,7 @@ BuildRequires: glib2-devel
 BuildRequires: glibc-devel
 BuildRequires: glibc-static
 BuildRequires: git-core
+Requires: mariadb-server
 
 %description
 %{summry}
@@ -72,6 +73,9 @@ install -p bin/* %{buildroot}%{_bindir}
 %{_bindir}/%{name}_log_signer
 
 %changelog
+* Tue May 18 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 1.3.13-3
+- requires: mariadb-server
+
 * Tue May 18 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 1.3.13-2
 - only install log_server and log_signer
 
